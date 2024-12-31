@@ -22,7 +22,7 @@ instance/
 .idea/
 
 # dotenv
-.env
+# .env
 
 # Jupyter Notebook
 .ipynb_checkpoints/
