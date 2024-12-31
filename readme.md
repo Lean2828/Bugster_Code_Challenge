@@ -21,7 +21,7 @@ La aplicación está construida sobre una arquitectura que le permite ser extens
 
 1. **Clona el repositorio**:
     ```bash
-    git clone [URL_DEL_REPOSITORIO]
+    git clone https://github.com/Lean2828/Bugster_Code_Challenge
     cd Bugster_Code_Challenge
     ```
 
