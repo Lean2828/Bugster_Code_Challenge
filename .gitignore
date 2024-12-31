@@ -1,0 +1,76 @@
+# Python-specific ignores
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Django, FastAPI, or similar framework-specific files
+*.log
+*.pot
+*.pyc
+db.sqlite3
+instance/
+.webassets-cache
+*.mo
+*.pot
+*.swp
+.idea/
+
+# dotenv
+.env
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Docker-specific ignores
+*.pid
+*.log
+docker-compose.override.yml
+.dockerignore
+
+# AWS-related ignores
+*.pem
+*.key
+.aws/
+.s3cfg
+
+# VS Code-specific ignores
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+*~
+
+# Coverage files
+.coverage
+coverage.xml
+htmlcov/
+
+# Testing
+.pytest_cache/
+.tox/
+
+# Build files
+build/
+dist/
+*.egg-info/
+.eggs/
+*.manifest
+*.spec
+
+# Shared module (ignore any local modifications)
+shared_module/__pycache__/
+shared_module/*.py[cod]
+
+# Generated files (logs, artifacts, etc.)
+*.log
+*.out
+*.err

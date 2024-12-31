@@ -1,0 +1,67 @@
+version: "3.9"
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    command: --noauth
+    volumes:
+      - mongodb_data:/data/db
+    restart: always
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    depends_on:
+      - mongodb
+    restart: always
+
+  event_service:
+    build:
+      context: .
+      dockerfile: ./services/event_service/Dockerfile
+    container_name: event_service
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    environment:
+      DB_URI: mongodb://mongodb:27017
+      DB_NAME: bugster_db
+      STORIES_SERVICE_URL: "http://story_service:8001/v1/stories/"
+
+  story_service:
+    build:
+      context: .
+      dockerfile: ./services/story_service/Dockerfile
+    container_name: story_service
+    ports:
+      - "8001:8001"
+    depends_on:
+      - mongodb
+    environment:
+      DB_URI: mongodb://mongodb:27017
+      DB_NAME: bugster_db
+
+  test_service:
+    build:
+      context: .
+      dockerfile: ./services/test_service/Dockerfile
+    container_name: test_service
+    ports:
+      - "8002:8002"
+    depends_on:
+      - story_service
+    environment:
+      DB_URI: mongodb://mongodb:27017
+      DB_NAME: bugster_db
+      STORIES_SERVICE_URL: "http://story_service:8001/v1/stories/"
+
+volumes:
+  mongodb_data:
